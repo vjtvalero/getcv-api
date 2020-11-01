@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Headers, HttpCode, Param, Post, Redirect, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { CreateAccountDto } from './account.dto';
 import { Account } from './account.entity';
@@ -8,18 +8,17 @@ export class AccountController {
     constructor(private readonly service: AccountService) { }
 
     @Post('new')
-    create(@Headers() headers, @Body() body: CreateAccountDto): string {
-        console.log(`body: ${JSON.stringify(body)}`);
-        return this.service.createAccount();
+    create(@Body() createAccountDto: CreateAccountDto): Account {
+        return this.service.create(createAccountDto);
     }
 
     @Get('verify')
-    verify(@Headers() headers, @Body() body): string {
+    verify(@Body() body): string {
         return 'verify your account here';
     }
 
-    @Get(':id')
-    async findOne(@Param() params): Promise<Account> {
+    @Get('find/:id')
+    async findOne(@Param() params: { id: number; }): Promise<Account> {
         return await this.service.findOne(params.id);
     }
 }

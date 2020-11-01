@@ -2,15 +2,15 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Account {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
 
-    @Column()
+    @Column({ default: '', unique: true })
     email: string;
 
-    @Column()
+    @Column({ default: '' })
     password: string;
 
-    @Column()
+    @Column({ default: '' })
     verify_token: string;
 }

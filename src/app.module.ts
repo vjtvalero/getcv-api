@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { Account } from './account/account.entity';
 import { AccountModule } from './account/account.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
     imports: [
@@ -28,7 +29,8 @@ import { AccountModule } from './account/account.module';
             }),
             inject: [ConfigService]
         }),
-        AccountModule
+        AccountModule,
+        AuthModule
     ],
     controllers: [AppController],
     providers: [AppService],
