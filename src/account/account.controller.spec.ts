@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AccountsController } from './account.controller';
-import { AccountsService } from './account.service';
+import { AccountController } from './account.controller';
+import { AccountService } from './account.service';
 
-describe('AccountsController', () => {
-    let controller: AccountsController;
+describe('AccountController', () => {
+    let controller: AccountController;
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            controllers: [AccountsController],
+            controllers: [AccountController],
             providers: [
                 {
-                    provide: AccountsService,
+                    provide: AccountService,
                     useValue: {
                         createAccount: jest.fn()
                     }
@@ -18,7 +18,7 @@ describe('AccountsController', () => {
             ]
         }).compile();
 
-        controller = module.get<AccountsController>(AccountsController);
+        controller = module.get<AccountController>(AccountController);
     });
 
     it('should be defined', () => {
