@@ -11,8 +11,8 @@ export class AccountService {
         private accountRepository: Repository<Account>,
     ) { }
 
-    findOne(id: number): Promise<Account> {
-        return this.accountRepository.findOne(id);
+    findOne(email: string): Promise<Account> {
+        return this.accountRepository.findOne({ email });
     }
 
     create(accountDetails: CreateAccountDto): Account {

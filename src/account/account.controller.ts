@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { CreateAccountDto } from './account.dto';
 import { Account } from './account.entity';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('account')
 export class AccountController {
@@ -17,8 +18,9 @@ export class AccountController {
         return 'verify your account here';
     }
 
-    @Get('find/:id')
-    async findOne(@Param() params: { id: number; }): Promise<Account> {
-        return await this.service.findOne(params.id);
+    @UseGuards(JwtAuthGuard)
+    @Get('find/:email')
+    async findOne(@Param() params: { email: string; }): Promise<Account> {
+        return await this.service.findOne(params.email);
     }
 }
