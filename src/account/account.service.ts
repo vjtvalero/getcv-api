@@ -15,9 +15,9 @@ export class AccountService {
         return this.accountRepository.findOne({ email });
     }
 
-    create(accountDetails: CreateAccountDto): Account {
+    async create(accountDetails: CreateAccountDto): Promise<Account> {
         const newAccount = this.accountRepository.create(accountDetails);
-        this.accountRepository.save(newAccount);
+        await this.accountRepository.save(newAccount);
         return newAccount;
     }
 }
